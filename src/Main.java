@@ -60,4 +60,15 @@ public class Main {
         );
         JOptionPane.showMessageDialog(null, "Programa finalizado");
     }
+
+    private static String pedirDescripcion(int numero) {
+        String descripcion;
+        do {
+            descripcion = JOptionPane.showInputDialog("Producto " + numero + "\nDescripción (Introduzca un 0 si quiere salir):");
+            if (descripcion == null || descripcion.trim().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "La descripción no puede estar vacía.");
+            }
+        } while (descripcion == null || descripcion.trim().isEmpty());
+        return descripcion.trim();
+    }
 }
