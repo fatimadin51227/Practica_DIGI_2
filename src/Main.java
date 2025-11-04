@@ -58,6 +58,7 @@ public class Main {
                         "Producto con más unidades: " + descripcionMasUnidades + " (" + maxUnidades + " unidades)\n" +
                         "Producto que caduca primero: " + descripcionMasPronto + " (Caduca: " + fechaMasPronto + ")"
         );
+        JOptionPane.showMessageDialog(null, "Fecha actual del sistema: " + obtenerFechaActual());
         JOptionPane.showMessageDialog(null, "Programa finalizado");
     }
 
@@ -82,5 +83,11 @@ public class Main {
             }
         } while (!aceptar);
         return unidades;
+    }
+
+    private static String obtenerFechaActual() {
+        LocalDate hoy = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return hoy.format(formato);
     }
 }
