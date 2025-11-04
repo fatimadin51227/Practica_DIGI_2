@@ -60,4 +60,27 @@ public class Main {
         );
         JOptionPane.showMessageDialog(null, "Programa finalizado");
     }
+
+    private static int pedirUnidades() {
+        int unidades = 0;
+        boolean aceptar = false;
+        do {
+            try {
+                String mensaje = JOptionPane.showInputDialog("Número de unidades (Introduzca un 0 si desea salir):");
+                if (mensaje == null) {
+                    JOptionPane.showMessageDialog(null, "Debes ingresar un valor numérico.");
+                    continue;
+                }
+                unidades = Integer.parseInt(mensaje);
+                if (unidades < 0) {
+                    JOptionPane.showMessageDialog(null, "Las unidades no pueden ser negativas.");
+                } else {
+                    aceptar = true;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error: ingresa un número entero válido.");
+            }
+        } while (!aceptar);
+        return unidades;
+    }
 }
