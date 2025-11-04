@@ -71,4 +71,36 @@ public class Main {
         } while (descripcion == null || descripcion.trim().isEmpty());
         return descripcion.trim();
     }
+
+    private static LocalDate pedirFecha() {
+        LocalDate fecha = null;
+        boolean aceptar = false;
+
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        String fecha2 = "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01])$";
+        Pattern pat = Pattern.compile(fecha2);
+        do {
+            try {
+                String mensaje = JOptionPane.showInputDialog("Fecha de caducidad (YYYY/MM/DD):");
+                if (mensaje == null) {
+                    JOptionPane.showMessageDialog(null, "Debes introducir una fecha.");
+                    continue;
+                }
+
+                Matcher m = pat.matcher(mensaje);
+
+                if (!m.matches()) {
+                    JOptionPane.showMessageDialog(null, "Formato invalido, usa el formato yyyy/MM/dd");
+                    continue;
+                }
+                fecha = LocalDate.parse(mensaje, formato);
+                aceptar = true;
+
+            } catch (DateTimeParseException e) {
+                JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Usa YYYY/MM/DD.");
+            }
+        } while (!aceptar);
+        return fecha;
+    }
 }
