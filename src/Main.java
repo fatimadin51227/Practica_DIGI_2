@@ -58,7 +58,37 @@ public class Main {
                         "Producto con más unidades: " + descripcionMasUnidades + " (" + maxUnidades + " unidades)\n" +
                         "Producto que caduca primero: " + descripcionMasPronto + " (Caduca: " + fechaMasPronto + ")"
         );
+        JOptionPane.showMessageDialog(null, "Fecha actual del sistema: " + obtenerFechaActual());
         JOptionPane.showMessageDialog(null, "Programa finalizado");
+    }
+    
+    private static int pedirUnidades() {
+        int unidades = 0;
+        boolean aceptar = false;
+        do {
+            try {
+                String mensaje = JOptionPane.showInputDialog("Número de unidades (Introduzca un 0 si desea salir):");
+                if (mensaje == null) {
+                    JOptionPane.showMessageDialog(null, "Debes ingresar un valor numérico.");
+                    continue;
+                }
+                unidades = Integer.parseInt(mensaje);
+                if (unidades < 0) {
+                    JOptionPane.showMessageDialog(null, "Las unidades no pueden ser negativas.");
+                } else {
+                    aceptar = true;
+                }
+            } catch (NumberFormatException e) {
+                JOptionPane.showMessageDialog(null, "Error: ingresa un número entero válido.");
+            }
+        } while (!aceptar);
+        return unidades;
+    }
+
+    private static String obtenerFechaActual() {
+        LocalDate hoy = LocalDate.now();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        return hoy.format(formato);
     }
 
     private static String pedirDescripcion(int numero) {
